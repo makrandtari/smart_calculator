@@ -1,0 +1,29 @@
+<div class="card" style="width: 18rem;border: 1px solid #ffc800; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+align-items: center; margin: 0 auto; margin-top: 50px;">
+    <div class="card-header" style="background-color: #ffc800; color: white; font-weight: bold;width: 100%; text-align: center; padding: 10px; border-bottom: 1px solid #ffc800;">
+        Smart Calculator
+    </div>
+<div class="card-body">
+<%= form_with url: calculator_calculate_path,
+              method: :post,
+              data: { turbo: false } do |f| %>
+              <label for="number1">Number 1:</label>
+  <%= f.text_field :num1%>
+  <label for="number2">Number 2:</label>
+  <%= f.text_field :num2%>
+  <br/><br/>
+  <label for="operation">Operation:</label>
+  <%= f.select :operation, options_for_select([['+', '+'], ['-', '-'], ['*', '*'], ['/', '/']]) %>
+  <br/>
+  <%= f.submit "calculate", class: "btn btn-primary" %>
+
+<% if @error.present? %>
+  <h3 style="color: red;"><%=@error %></h3>
+  <%end%>
+<% end %>
+<% if @result.present? %>
+  <h3>Result: <%= @result %></h3>
+
+<% end %>
+
+</div>
